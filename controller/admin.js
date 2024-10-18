@@ -1,4 +1,4 @@
-const asyncMap = require("../utils/asyncMap");
+const { asyncMap } = require("../utils/asyncMap");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 const Participants = require("../model/participants");
@@ -7,9 +7,9 @@ const updateParticipantsStatus = async (req, res) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    const { userInfoArr } = req.body;
+    const { participantsInfoArr } = req.body;
 
-    if (_.isNil(userInfoArr) || !Array.isArray(userInfoArr)) {
+    if (_.isNil(participantsInfoArr) || !Array.isArray(participantsInfoArr)) {
       await session.abortTransaction();
       return res.send({
         success: false,
@@ -19,7 +19,7 @@ const updateParticipantsStatus = async (req, res) => {
       });
     }
 
-    await asyncMap(userInfoArr, async (userInfo) => {
+    await asyncMap(participantsInfoArr, async (participantInfo) => {
       const {
         name,
         email,
@@ -27,7 +27,7 @@ const updateParticipantsStatus = async (req, res) => {
         allBadgesCompleted,
         noOfBadges,
         arcadeGame,
-      } = userInfo;
+      } = participantInfo;
 
       if (
         _.isNil(name) ||
@@ -40,7 +40,19 @@ const updateParticipantsStatus = async (req, res) => {
         throw new Error("Mandatory fields missing");
       }
 
-      //upsert in db
+      await Participants.updateOne(
+        { email },
+        {
+          $set: {
+            name,
+            accessCodeRedeemed,
+            allBadgesCompleted,
+            noOfBadges,
+            arcadeGame,
+          },
+        },
+        { upsert: true, session }
+      );
     });
 
     await session.commitTransaction();
@@ -52,6 +64,7 @@ const updateParticipantsStatus = async (req, res) => {
     });
   } catch (error) {
     await session.abortTransaction();
+    console.log(error);
     return res.send({
       success: false,
       status: 500,
