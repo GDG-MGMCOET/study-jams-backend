@@ -1,2 +1,2 @@
-# study-jams
-This is repo for Front End of GDG Gen AI Study Jams
+# study-jams-backend
+This is repo for Back End of GDG Gen AI Study Jams
