@@ -1,6 +1,7 @@
 const asyncMap = require("../utils/asyncMap");
 const _ = require("lodash");
 const mongoose = require("mongoose");
+const Participants = require("../model/participants");
 
 const updateParticipantsStatus = async (req, res) => {
   const session = await mongoose.startSession();
