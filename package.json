@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "study-jams-backend",
   "version": "1.0.0",
-  "description": "study-james backend",
+  "description": "This is repo for Back End of GDG Gen AI Study Jams",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "expess": "^0.0.1-security"
+    "express": "^4.21.1"
   }
 }
