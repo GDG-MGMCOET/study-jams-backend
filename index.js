@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get('/admin',auth,(req,res)=>{
+app.post('/admin',auth,(req,res)=>{
 
   // logic related to get userData.
 })
