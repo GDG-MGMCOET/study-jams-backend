@@ -9,7 +9,9 @@ const getparticipants = async (req, res) => {
         success: true,
         status: 200,
         message: "No participants found",
-        data: [],
+        data: {
+          participants:[]
+        },
       });
     }
 
@@ -17,7 +19,9 @@ const getparticipants = async (req, res) => {
       success: true,
       status: 200,
       message: "Participants retrieved successfully",
-      data: participants,
+      data: {
+        participants,
+      },
     });
   } catch (error) {
     console.log(error);
