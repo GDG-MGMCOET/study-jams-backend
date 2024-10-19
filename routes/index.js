@@ -3,6 +3,7 @@ const router = express.Router();
 
 const auth = require("../middleware/Authentication");
 const { updateParticipantsStatus } = require("../controller/admin");
+const getparticipants = require("../controller/participants");
 
 router.get("/", (req, res) => {
   return res.send({
@@ -10,6 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/participants", getparticipants);
 router.post(
   "/admin/update-participants-status",
   auth,
