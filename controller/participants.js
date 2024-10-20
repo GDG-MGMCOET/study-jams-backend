@@ -10,7 +10,7 @@ const getparticipants = async (req, res) => {
         status: 200,
         message: "No participants found",
         data: {
-          participants:[]
+          participants: [],
         },
       });
     }
@@ -21,6 +21,7 @@ const getparticipants = async (req, res) => {
       message: "Participants retrieved successfully",
       data: {
         participants,
+        lastUpdated: participants[0].updatedAt,
       },
     });
   } catch (error) {
