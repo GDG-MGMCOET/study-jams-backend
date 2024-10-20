@@ -21,9 +21,18 @@ const getparticipants = async (req, res) => {
 
     const maskedParticipants = participants.map((participant) => {
       const emailParts = participant.email.split("@");
-      const maskedEmail = `${emailParts[0].substring(0, 2)}***@${
-        emailParts[1]
-      }`;
+      const localPart = emailParts[0];
+
+      let maskedEmail;
+      if (localPart.length <= 4) {
+        maskedEmail = `${localPart}@${emailParts[1]}`;
+      } else {
+        const maskedLocalPart = `${localPart.substring(
+          0,
+          2
+        )}***${localPart.substring(localPart.length - 2)}`;
+        maskedEmail = `${maskedLocalPart}@${emailParts[1]}`;
+      }
 
       return {
         ...participant._doc,
