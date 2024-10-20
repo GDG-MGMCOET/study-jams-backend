@@ -4,7 +4,8 @@
   "description": "This is repo for Back End of GDG Gen AI Study Jams",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Suraj Sharma",
   "license": "ISC",
