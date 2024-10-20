@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 // Define allowed origins for CORS
-const allowedOrigins = ["https://gdg-mgm-genai.vercel.app"];
+const allowedOrigins = ["https://gdg-mgm-genai.vercel.app", "http://localhost:5173"];
 
 app.use(cors({
   origin: function (origin, callback) {
