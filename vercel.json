@@ -1,14 +1,28 @@
 {
   "version": 2,
-  "builds": [{ "src": "./index.js", "use": "@vercel/node" }],
-  "routes": [
+  "builds": [
+    {
+      "src": "index.js",    // Entry point of your Node.js app
+      "use": "@vercel/node" // Tells Vercel to use Node.js
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)", // Apply CORS headers for all API routes
+      "headers": [
         {
-            "src": "/(.*)",
-            "dest": "/index.js",
-            "methods":["GET","POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-            "headers":{
-                "Access-Control-Allow-Origin": "*"
-            }
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Authorization"
         }
-    ]
+      ]
+    }
+  ]
 }
